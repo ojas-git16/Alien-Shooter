@@ -18,11 +18,11 @@ def movement():
         y+=speed
     if x>=800-width:
         x=800-width
-    if x<=width:
-        x=width
+    if x<=0:
+        x=0
     if y>=800-width:
         y=800-width
-    if y<width:
-        y=width
+    if y<0:
+        y=0
 def draw(screen):
     pygame.draw.rect(screen,(255,0,255),(x,y,width,width))
