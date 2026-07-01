@@ -31,17 +31,18 @@ def movement():
     for alien in alienships:
         alien["y"]+=speed
 
-    # for alien in aliens:
-    #     if (alien["y"] >= 800):
-    #         game_over = True
+    for alien in alienships:
+        if (alien["y"] >= 800):
+            print("Game ended")
+            game_over = True
+            return
     
     # in case game down not end, if alien reaches bottom so updating the aliens list, so it does not overflow
-    new_aliens = []
-    for alien in alienships:
-        if(alien["y"]<800):
-            new_aliens.append(alien)
-    alienships = new_aliens
-
+    # new_aliens = []
+    # for alien in alienships:
+    #     if(alien["y"]<800):
+    #         new_aliens.append(alien)
+    # alienships = new_aliens
 def draw(screen):
     for alien in alienships:
         pygame.draw.rect(screen, (0, 255, 0), (alien["x"], alien["y"], width, height))

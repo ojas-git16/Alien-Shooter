@@ -3,6 +3,7 @@ import pygame
 width = 5       # bullet width
 height = 10     # bullet height
 speed = 8
+score=0
 
 bullets = []    # there might be multiple bullets at the same time
 
@@ -27,8 +28,9 @@ def movement():
 
 def draw(screen):
     for bullet in bullets:
-        pygame.draw.rect(screen, (255,255,0), (bullet["x"], bullet["y"], width, height))
+        pygame.draw.rect(screen, (255,255,255), (bullet["x"], bullet["y"], width, height))
 def collision(bullets,alienships,alien_width,alien_height):
+    global score
     for any_bullet in bullets[:]:
         for any_alien in alienships[:]:
             bullet_rect = pygame.Rect(any_bullet["x"],any_bullet["y"],width,height)
@@ -36,6 +38,7 @@ def collision(bullets,alienships,alien_width,alien_height):
             if bullet_rect.colliderect(alien_rect):
                 bullets.remove(any_bullet)
                 alienships.remove(any_alien)
+                score+=10
 
 
 
