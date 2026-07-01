@@ -27,7 +27,9 @@ while running:
     screen.fill((0,0,0))
     player.draw(screen)
     alien.draw(screen)
+    bullet.collision(bullet.bullets,alien.alienships,alien.width,alien.height)
     bullet.draw(screen)
+    
     pygame.display.update()
     clock.tick(60)
     

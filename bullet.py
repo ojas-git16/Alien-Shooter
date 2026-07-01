@@ -28,6 +28,14 @@ def movement():
 def draw(screen):
     for bullet in bullets:
         pygame.draw.rect(screen, (255,255,0), (bullet["x"], bullet["y"], width, height))
+def collision(bullets,alienships,alien_width,alien_height):
+    for any_bullet in bullets[:]:
+        for any_alien in alienships[:]:
+            bullet_rect = pygame.Rect(any_bullet["x"],any_bullet["y"],width,height)
+            alien_rect = pygame.Rect(any_alien["x"],any_alien["y"],alien_width,alien_height)
+            if bullet_rect.colliderect(alien_rect):
+                bullets.remove(any_bullet)
+                alienships.remove(any_alien)
 
 
 
