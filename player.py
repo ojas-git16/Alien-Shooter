@@ -6,7 +6,7 @@ speed=5
 width=45
 
 def movement():
-    global x,y
+    global x,y,player_rect
     keys=pygame.key.get_pressed()
     if keys[pygame.K_RIGHT]:
         x+=speed
@@ -24,5 +24,13 @@ def movement():
         y=800-width
     if y<0:
         y=0
+    player_rect=pygame.Rect(x,y,width,width)
+
 def draw(screen):
     pygame.draw.rect(screen,(255,0,255),(x,y,width,width))
+
+def reset():
+    global x, y, player_rect
+
+    x = 400
+    y = 730

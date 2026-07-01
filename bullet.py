@@ -4,6 +4,8 @@ width = 5       # bullet width
 height = 10     # bullet height
 speed = 8
 score=0
+explosion_sound=pygame.mixer.Sound("Sounds/explosion.mp3")
+laser_sound=pygame.mixer.Sound("Sounds/laser.mp3")
 
 bullets = []    # there might be multiple bullets at the same time
 
@@ -13,6 +15,7 @@ def fire(player_x, player_y):
     bul_x = player_x + player_dim // 2 - width // 2
     bul_y = player_y - height
     bullets.append({"x":bul_x, "y":bul_y})
+    laser_sound.play()
 
 def movement():
     global bullets
@@ -28,9 +31,9 @@ def movement():
 
 def draw(screen):
     for bullet in bullets:
-        pygame.draw.rect(screen, (255,255,255), (bullet["x"], bullet["y"], width, height))
+        pygame.draw.rect(screen, (255,255,0), (bullet["x"], bullet["y"], width, height))
 def collision(bullets,alienships,alien_width,alien_height):
-    global score
+    global score, explosion_sound
     for any_bullet in bullets[:]:
         for any_alien in alienships[:]:
             bullet_rect = pygame.Rect(any_bullet["x"],any_bullet["y"],width,height)
@@ -38,7 +41,13 @@ def collision(bullets,alienships,alien_width,alien_height):
             if bullet_rect.colliderect(alien_rect):
                 bullets.remove(any_bullet)
                 alienships.remove(any_alien)
+                explosion_sound.play()
                 score+=10
+def reset():
+    global bullets, score
+
+    bullets = []
+    score = 0
 
 
 

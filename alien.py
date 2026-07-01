@@ -25,14 +25,15 @@ def spawn():
         x = random.randint(0, 800-width)
         alienships.append({"x" : x , "y" : -height})  # y=-height because it appears above the window
 
-def movement():
-    global alienships
+def movement(player_rect):
+    global alienships,width,height
     global game_over
     for alien in alienships:
         alien["y"]+=speed
 
     for alien in alienships:
-        if (alien["y"] >= 800):
+        alien_rect=pygame.Rect(alien["x"],alien["y"],width,height)
+        if (alien["y"] >= 800 or alien_rect.colliderect(player_rect)):
             print("Game ended")
             game_over = True
             return
@@ -46,4 +47,14 @@ def movement():
 def draw(screen):
     for alien in alienships:
         pygame.draw.rect(screen, (0, 255, 0), (alien["x"], alien["y"], width, height))
+
+def reset():
+    global alienships, spawn_timer, spawn_delay, speed, game_over
+
+    alienships = []
+    spawn_timer = 0
+    spawn_delay = 120
+    speed = 2
+    game_over = False
+
 
